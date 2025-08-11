@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony Racing Club</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #ff3030;
+            --dark-blue: #0a1428;
+            --electric-blue: #00d4ff;
+            --gradient: linear-gradient(135deg, #ff3030, #ff6b6b);
+            --text-light: #ffffff;
+            --text-dark: #2c3e50;
+            --bg-light: #f8fafc;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-blue), #1a2742);
+            color: var(--text-light);
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(255, 48, 48, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #fff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 48, 48, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #2c3e50);
+            color: var(--text-light);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.1), transparent),
+                        radial-gradient(circle at 70% 50%, rgba(255, 48, 48, 0.1), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fff, #00d4ff, #ff3030);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 48, 48, 0.3);
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 48, 48, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .role-card {
+            background: linear-gradient(135deg, white, #f8fafc);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+            box-shadow: 0 20px 40px rgba(255, 48, 48, 0.2);
+        }
+
+        .role-card strong {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        /* Contact */
+        #contact {
+            background: var(--dark-blue);
+            color: var(--text-light);
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        #contact h2 {
+            color: white;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Floating elements */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <!--div class="logo floating">H</div -->
+            <span><img height=150 src="https://resources.finalsite.net/images/f_auto,q_auto/v1681726454/harmonytxorg/dqftadb40c3yywgsyyjv/HSISugarLandWHITEletters.png"/></span>
+            <h1>Harmony Racing Club</h1>
+            <p class="tagline">Hands-On STEM | Teamwork | Innovation on Wheels</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#about">About</a>
+            <a href="#activities">Activities</a>
+            <a href="#impact">Impact</a>
+            <a href="#roles">Roles</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Building a $500 Race Car for the 24 Hours of Lemons</h1>
+            <p>Bringing engineering, creativity, and teamwork to life through competitive motorsports.</p>
+            <a href="#about" class="cta-button">Discover Our Mission</a>
+        </div>
+    </div>
+
+    <section id="about" class="fade-in">
+        <div class="card">
+            <h2>About the Club</h2>
+            <p>The Harmony Racing Club is a proposed student organization giving students hands-on experience in designing, building, and racing a budget-friendly endurance car in the 24 Hours of Lemons. We integrate STEM learning with teamwork, safety, and real-world problem-solving in an exciting motorsports environment.</p>
+        </div>
+    </section>
+
+    <section id="activities" class="fade-in">
+        <h2>Club Activities</h2>
+        <div class="card">
+            <ul>
+                <li>Weekly strategic planning meetings</li>
+                <li>Hands-on car build and fabrication sessions</li>
+                <li>Comprehensive safety and compliance training</li>
+                <li>Active fundraising and sponsor outreach</li>
+                <li>Thrilling race day participation</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="impact" class="fade-in">
+        <h2>Impact on Our School</h2>
+        <div class="card">
+            <ul>
+                <li>Boosts reputation as an innovative STEM hub</li>
+                <li>Provides national exposure through Lemons events</li>
+                <li>Engages local businesses and community support</li>
+                <li>Promotes teamwork, leadership, and real-world skills</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="roles" class="fade-in">
+        <h2>Roles and Structure</h2>
+        <div class="grid">
+            <div class="role-card">
+                <strong>Mechanical Team</strong>
+                <p>Engine rebuilding, brake systems, suspension tuning, and drivetrain optimization.</p>
+            </div>
+            <div class="role-card">
+                <strong>Electrical Systems</strong>
+                <p>Wiring harnesses, lighting systems, data acquisition, and electronic troubleshooting.</p>
+            </div>
+            <div class="role-card">
+                <strong>Safety & Compliance</strong>
+                <p>Roll cage construction, fire safety systems, driver harnesses, and race regulations.</p>
+            </div>
+            <div class="role-card">
+                <strong>Media & Marketing</strong>
+                <p>Social media promotion, event documentation, sponsor relations, and brand building.</p>
+            </div>
+            <div class="role-card">
+                <strong>Logistics Management</strong>
+                <p>Budget planning, project scheduling, parts procurement, and sponsor coordination.</p>
+            </div>
+            <div class="role-card">
+                <strong>Racing Driver</strong>
+                <p>Selected through rigorous training programs and performance evaluations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get Involved</h2>
+        <div class="contact-info">
+            <p><strong>Muhammad Ahsan Siddique</strong><br>
+            Club Founder & Team Lead<br>
+            Email: ahsun.siddique@gmail.com</p>
+            <br>
+            <a href="mailto:ahsun.siddique@gmail.com" class="cta-button">Contact Us Today</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Harmony Racing Club | Harmony School of Innovation - Sugar Land
+    </footer>
+
+    <script>
+        // Smooth scrolling animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Add smooth hover effects to navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
